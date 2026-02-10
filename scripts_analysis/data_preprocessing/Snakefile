@@ -1,0 +1,97 @@
+# mamba activate ae
+# snakemake --cores 1 name_rule
+
+path = '.../AE/data/mtbi/'
+
+
+ANIMAL_NUMBERS = ['27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38']
+STAIN=['mye']
+
+rule n1_findingCoordinates:
+    input:
+        expand(path+'ISM_{animal_numbers}/tiff_files/{stain}/coordinates', animal_numbers=ANIMAL_NUMBERS,stain=STAIN)
+
+rule detecting_sections_position:
+    input:
+        path+'ISM_{animal_numbers}/tiff_files/{stain}',
+    output:
+        directory(path+'ISM_{animal_numbers}/tiff_files/{stain}/coordinates'),
+    shell:
+        'python coordinates.py {input}'
+
+# -------------------------------
+rule n2_slice:
+    input:
+        expand(path+'ISM_{animal_numbers}/sliced/{stain}', animal_numbers=ANIMAL_NUMBERS, stain=STAIN)
+
+rule createFolder:
+    input:
+        path+'ISM_{animal_numbers}',
+    output:
+        directory(path+'ISM_{animal_numbers}/sliced')
+    shell:
+        'python creating_directory.py {output}'
+
+rule cutting_glasses:
+    input:
+        path+'ISM_{animal_numbers}/tiff_files/{stain}',
+    output:
+        directory(path+'ISM_{animal_numbers}/sliced/{stain}'),
+    threads:
+        6
+    shell:
+        'python bounding_rectangle.py {input} {output}'
+
+
+# -------------------------------
+rule extra:
+    input:
+        expand(path+'ISM_{animal_numbers}/sliced/{stain}inspection', animal_numbers=ANIMAL_NUMBERS, stain=STAIN)
+
+rule recheck:
+    input:
+        path+'ISM_{animal_numbers}/sliced/{stain}',
+    output:
+        directory(path+'ISM_{animal_numbers}/sliced/{stain}inspection'),
+    threads:
+        6
+    shell:
+        'python check_cuts.py {input} {output}'
+# --------------------------------
+rule n3_order:
+    input:
+        expand(path+'ISM_{animal_numbers}/ordered/{stain}', animal_numbers=ANIMAL_NUMBERS, stain=STAIN)
+
+rule order:
+    input:
+        path+'ISM_{animal_numbers}/sliced/{stain}',
+    output:
+        directory(path+'ISM_{animal_numbers}/ordered/{stain}'),
+    shell:
+        'python enumerate.py {input} {STAIN}'
+# --------------------------------------
+# this one is manual... to decide first_section, last_section and reference_section
+rule n4_normalizing:
+    input:
+        expand(path + 'ISM_{animal_numbers}/normalized', animal_numbers=ANIMAL_NUMBERS, stain=STAIN)
+
+rule norm:
+    input:
+        path + 'ISM_{animal_numbers}/ordered/{stain}',
+    output:
+        directory(path+'ISM_{animal_numbers}/normalized/{stain}'),
+    shell:
+        'python normalization.py {input} {STAIN}'
+# --------------------------------------
+rule n5_tiles:
+    input:
+        expand(path + 'ISM_{animal_numbers}/tiles', animal_numbers=ANIMAL_NUMBERS, stain=STAIN)
+
+rule making_tiles:
+    input:
+        path + 'ISM_{animal_numbers}/normalized',
+    output:
+        path + 'ISM_{animal_numbers}/tiles',
+    shell:
+        'python making_tiles.py'
+

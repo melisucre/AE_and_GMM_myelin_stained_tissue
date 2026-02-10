@@ -1,0 +1,64 @@
+
+decisions based on:
+                        bregma +2.28 mm
+                        bregma -8.16 mm
+
+
+animal ISM_24   mTBI
+                mye:    first_slice = 18    last_slice = 69     reference = 41
+                nis:    first_slice = 13    last_slice = 63     reference = 39
+
+animal ISM_26   sham-operated
+                mye:    first_slice = 18    last_slice = 70     reference = 41
+                nis:    first_slice = 18    last_slice = 69     reference = 40
+
+animal ISM_27
+                mye:    first_slice = 18    last_slice = 69     reference = 40
+                nis:    first_slice = 18    last_slice = 68     reference = 43
+
+animal ISM_28
+                discarded. awful sections due to cutting
+
+animal ISM_29
+                mye:    first_slice = 18    last_slice = 68     reference = 41
+                nis:    first_slice = 18    last_slice = 67     reference = 44
+
+animal ISM_30
+                mye:    first_slice = 19    last_slice = 68      reference = 41
+                nis:    first_slice = 20    last_slice = 65      reference = 45
+
+animal ISM_31
+                mye:    first_slice = 19    last_slice = 66      reference = 41
+                nis:    first_slice = 19    last_slice = 65      reference = 42
+
+animal ISM_32
+                mye:    first_slice = 14    last_slice = 62      reference = 38
+                nis:    first_slice = 14    last_slice = 62      reference = 40
+
+animal ISM_33
+                mye:    first_slice = 19    last_slice = 64      reference = 45
+                nis:    first_slice = 19    last_slice = 64      reference = 44
+
+animal ISM_34
+                mye:    first_slice = 19    last_slice = 63      reference = 41
+                nis:    first_slice = 20    last_slice = 62      reference = 45
+
+animal ISM_35
+                mye:    first_slice = 15    last_slice = 58      reference = 41
+                nis:    first_slice = 16    last_slice = 58      reference = 42
+
+animal ISM_36
+                mye:    first_slice = 18    last_slice = 63      reference = 45
+                nis:    first_slice = 18    last_slice = 62      reference = 47
+
+animal ISM_37
+                mye:    first_slice = 15    last_slice = 58      reference = 41
+                nis:    first_slice = 15    last_slice = 57      reference = 41
+
+animal ISM_38
+                mye:    first_slice = 11    last_slice = 55      reference = 38
+                nis:    first_slice = 11    last_slice = 55      reference = 40
+
+
+
+
